@@ -94,5 +94,19 @@ public class CensusAnalyserTest {
 			Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM, e.type);
 		}
 	}
+	
+	@Test
+	public void givenIndiaStateCode_WithWrongFileType_ShouldThrowException() {
+		try {
+			CensusAnalyser censusAnalyser = new CensusAnalyser();
+			ExpectedException exceptionRule = ExpectedException.none();
+			exceptionRule.expect(CensusAnalyserException.class);
+			censusAnalyser.loadIndiaCensusData(WRONG_FILE_TYPE_FILE_PATH, ',');
+		} catch (CensusAnalyserException e) {
+			Assert.assertEquals(CensusAnalyserException.ExceptionType.FILE_TYPE_MISMATCH, e.type);
+		}
+	}
+
+	
 
 }
