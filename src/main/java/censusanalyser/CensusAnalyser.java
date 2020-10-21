@@ -1,6 +1,7 @@
 package censusanalyser;
 
 import java.io.IOException;
+
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -8,9 +9,6 @@ import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 import java.util.stream.StreamSupport;
-
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.CsvToBeanBuilder;
 
 public class CensusAnalyser {
 	public boolean correctFileName(String fileName) {
@@ -22,31 +20,34 @@ public class CensusAnalyser {
 		}
 	}
 
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public int loadIndiaCensusData(String csvFilePath, char delimiter) throws CensusAnalyserException {
 		try {
 			this.FileMismatch(csvFilePath);
 			Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));
-			Iterator<IndiaStateCodeCSV> censusCSVIterator = new OpenCsvBuilder().getCSVFileIterator(reader, IndiaStateCodeCSV.class,
+			ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
+			Iterator<IndiaCensusCSV> censusCSVIterator =csvBuilder.getCSVFileIterator(reader, IndiaCensusCSV.class,
 					',');
 
-			int namOfEnteries = this.getCount(censusCSVIterator);
-			return namOfEnteries;
+		 
+			return this.getCount(censusCSVIterator);
 		} catch (IOException e) {
 			throw new CensusAnalyserException(e.getMessage(),
 					CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
 		}
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public int loadIndiaStateCode(String csvFilePath, char delimiter) throws CensusAnalyserException {
 		try {
 			this.FileMismatch(csvFilePath);
 			Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));
-			
-			Iterator<IndiaStateCodeCSV> stateCSVIterator = new OpenCsvBuilder().getCSVFileIterator(reader, IndiaStateCodeCSV.class,
+			ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
+			Iterator<IndiaStateCodeCSV> stateCSVIterator = csvBuilder.getCSVFileIterator(reader, IndiaStateCodeCSV.class,
 					',');
-
-			int namOfEnteries = this.getCount(stateCSVIterator);
-			return namOfEnteries;
+			
+			return this.getCount(stateCSVIterator);
 		} catch (IOException e) {
 			throw new CensusAnalyserException(e.getMessage(),
 					CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);

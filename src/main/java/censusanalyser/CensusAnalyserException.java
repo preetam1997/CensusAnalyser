@@ -1,5 +1,6 @@
 package censusanalyser;
 
+@SuppressWarnings("serial")
 public class CensusAnalyserException extends Exception {
 
     enum ExceptionType {
