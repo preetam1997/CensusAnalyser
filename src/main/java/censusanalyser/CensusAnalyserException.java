@@ -1,5 +1,7 @@
 package censusanalyser;
 
+import csvbuilder.CSVBuilderException;
+
 @SuppressWarnings("serial")
 public class CensusAnalyserException extends CSVBuilderException {
 

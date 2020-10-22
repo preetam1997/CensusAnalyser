@@ -1,12 +1,12 @@
-package censusanalyser;
+package csvbuilder;
 
 
 public class CSVBuilderException extends Exception {
-	 enum ExceptionType {
+	 public enum ExceptionType {
 	        CENSUS_FILE_PROBLEM,UNABLE_TO_PARSE,FILE_TYPE_MISMATCH,OTHER_RUNTIME_PROBLEM
 	    }
 
-	    ExceptionType type;
+	    public ExceptionType type;
 
 	    public CSVBuilderException(String message, ExceptionType type) {
 	        super(message);
