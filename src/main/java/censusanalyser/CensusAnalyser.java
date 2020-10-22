@@ -13,7 +13,8 @@ import java.util.stream.StreamSupport;
 public class CensusAnalyser {
 	public boolean correctFileName(String fileName) {
 		String regex = "^([a-zA-Z0-9]+).csv$";
-		if (fileName.length() == 0) {
+		
+		if (fileName!= null &&fileName.length() == 0) {
 			return false;
 		} else {
 			return Pattern.matches(regex, fileName);
@@ -34,7 +35,7 @@ public class CensusAnalyser {
 			throw new CensusAnalyserException(e.getMessage(),
 					CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
 		}
-	}
+	} 
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public int loadIndiaStateCode(String csvFilePath, char delimiter) throws CensusAnalyserException {

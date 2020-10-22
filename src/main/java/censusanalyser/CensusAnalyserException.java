@@ -1,21 +1,20 @@
 package censusanalyser;
 
 @SuppressWarnings("serial")
-public class CensusAnalyserException extends Exception {
+public class CensusAnalyserException extends CSVBuilderException {
 
-    enum ExceptionType {
-        CENSUS_FILE_PROBLEM,UNABLE_TO_PARSE,FILE_TYPE_MISMATCH,OTHER_RUNTIME_PROBLEM
-    }
+	ExceptionType type;
 
-    ExceptionType type;
 
     public CensusAnalyserException(String message, ExceptionType type) {
-        super(message);
-        this.type = type;
-    }
-
-    public CensusAnalyserException(String message, ExceptionType type, Throwable cause) {
-        super(message, cause);
-        this.type = type;
-    }
+		super(message, type);
+		this.type = type;
+	}
+    
+    public CensusAnalyserException(String message, ExceptionType type, Throwable throwable) {
+		super(message, type);
+		this.type = type;
+	}
+	
+    
 }
