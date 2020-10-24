@@ -1,12 +1,20 @@
 package csvbuilder;
 
+import java.io.IOException;
 import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
+
+import censusanalyser.CensusAnalyserException;
+import censusanalyser.IndiaCensusCSV;
+import censusanalyser.IndiaStateCodeCSV;
+import model.CensusDAO;
 
 public class OpenCsvBuilder<E> implements ICSVBuilder {
 	
@@ -49,4 +57,8 @@ public class OpenCsvBuilder<E> implements ICSVBuilder {
 					CSVBuilderException.ExceptionType.OTHER_RUNTIME_PROBLEM);
 		}
 	}
+	
+	public static List<CensusDAO> censusDaoList = new ArrayList<>();
+   
+
 }
