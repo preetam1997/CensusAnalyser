@@ -81,5 +81,27 @@ public class CensusAnalyser {
 		return numOfEnteries;
 	}
 
-	
+	public String getStateWiseAortedCensusData() throws CSVBuilderException {
+		if (censusCsvList == null || censusCsvList.size() == 0) {
+			throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
+		}
+		Comparator<IndiaCensusCSV> censusComparator = Comparator.comparing(census -> census.state);
+		this.sort(censusComparator);
+		String sortedStateCensus = new Gson().toJson(censusCsvList);
+		return sortedStateCensus;
+
+	}
+
+	private void sort(Comparator<IndiaCensusCSV> censusComparator) {
+		for (int i = 0; i < censusCsvList.size() - 1; i++) {
+			for (int j = 0; j < censusCsvList.size() - i - 1; j++) {
+				IndiaCensusCSV census1 = censusCsvList.get(j);
+				IndiaCensusCSV census2 = censusCsvList.get(j + 1);
+				if (censusComparator.compare(census1, census2) > 0) {
+					censusCsvList.set(j, census2);
+					censusCsvList.set(j + 1, census1);
+				}
+			}
+		}
+	}
 }
