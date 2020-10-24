@@ -116,6 +116,18 @@ public class CensusAnalyser {
 		return sortedStateCensus;
 
 	}
+	
+	public String getPopulationSortedCensusData() throws CSVBuilderException {
+		if (censusDaoList == null || censusDaoList.size() == 0) {
+			throw new CSVBuilderException("No Census Data", CSVBuilderException.ExceptionType.NO_CENSUS_DATA);
+		}
+
+		Comparator<CensusDAO> stateCodeComparator = Comparator.comparing(census -> census.population);
+		this.sort(stateCodeComparator);
+		String sortedStateCensus = new Gson().toJson(censusDaoList);
+		return sortedStateCensus;
+
+	}
 
 	private void sort(Comparator<CensusDAO> censusComparator) {
 		for (int i = 0; i < censusDaoList.size() - 1; i++) {
