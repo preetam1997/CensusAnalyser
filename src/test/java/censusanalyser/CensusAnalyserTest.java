@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import com.google.gson.Gson;
+
 import csvbuilder.CSVBuilderException;
 
 public class CensusAnalyserTest {
@@ -132,6 +134,8 @@ public class CensusAnalyserTest {
 			Assert.assertEquals(CSVBuilderException.ExceptionType.OTHER_RUNTIME_PROBLEM, e.type);
 		}
 	}
+	
+	
 
 	
 
