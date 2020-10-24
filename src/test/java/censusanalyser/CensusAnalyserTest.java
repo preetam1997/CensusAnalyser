@@ -173,4 +173,13 @@ public class CensusAnalyserTest {
 		IndiaCensusCSV[] censusCsv = new Gson().fromJson(sortedCensusData, IndiaCensusCSV[].class);
 		Assert.assertEquals("Bihar", censusCsv[0].state);
 	}
+	
+	@Test
+	public void givenIndianCensusData_WhenSortedOnArea_ShouldReturnSortedResult() throws CSVBuilderException {
+		CensusAnalyser censusAnalyser = new CensusAnalyser();
+		censusAnalyser.loadCensusData(IndiaCensusCSV.class, INDIA_CENSUS_CSV_FILE_PATH, ',');
+		String sortedCensusData = censusAnalyser.getAreaWiseSortedCensusData();
+		IndiaCensusCSV[] censusCsv = new Gson().fromJson(sortedCensusData, IndiaCensusCSV[].class);
+		Assert.assertEquals("Rajasthan", censusCsv[0].state);
+	}
 }
