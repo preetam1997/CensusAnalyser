@@ -58,7 +58,6 @@ public class OpenCsvBuilder<E> implements ICSVBuilder {
 		}
 	}
 	
-	public static List<CensusDAO> censusDaoList = new ArrayList<>();
-   
+	
 
 }
